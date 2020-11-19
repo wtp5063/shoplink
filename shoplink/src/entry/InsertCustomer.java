@@ -22,7 +22,6 @@ public class InsertCustomer extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	  request.setCharacterEncoding("UTF-8");
 	  //POSTされたデータを変数に格納。
 	  String name = request.getParameter("name");
 	  String email = request.getParameter("email");
