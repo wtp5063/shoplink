@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import database.BaseDatabase;
 
@@ -21,16 +23,20 @@ public class ErrorCheck {
     }
   }
 
-  public void regExpCheck(String value, String pattern, String name) {
-    if(!value.matches(pattern)) {
+  public void regExpCheck(String value, String regExp, String name) {
+    Pattern p = Pattern.compile(regExp);
+    Matcher m = p.matcher(value);
+    if(!m.matches()) {
       this.errors.add(name + "を正しい形式で入力して下さい");
     }
   }
 
   public void passwordCheck(String value1, String value2) {
-    if(!value1.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!-/:-@[-`{-~])[!-~]{8,48}$")) {
+    Pattern p = Pattern.compile("[a-zA-Z]+\\d+[\\./_\\-]*{8,15}");
+    Matcher m = p.matcher(value1);
+    if(!m.matches()){
       this.errors.add("パスワードは半角英数字の組み合わせと記号(.-/_)がご利用頂けます");
-    } else if(!(value1 == value2)) {
+    } else if(!value1.equals(value2)) {
       this.errors.add("パスワードが一致しません");
     }
   }

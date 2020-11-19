@@ -35,7 +35,7 @@ public class InsertCustomer extends HttpServlet {
 	  eCheck.requiredCheck(name, "名前");
 	  eCheck.duplicateCheck(email);
 	  eCheck.passwordCheck(password, validation);
-	  eCheck.regExpCheck(tel, "^0\\\\d{9,11}$", "電話番号");
+	  eCheck.regExpCheck(tel, "^0\\d{9,}$", "電話番号");
 	  //エラーが見つかった場合にエラー情報をリクエストに格納し、フォワード。
 	  if(eCheck.hasErrors()) {
 	    request.setAttribute("errors", eCheck.errorList());
