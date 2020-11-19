@@ -68,6 +68,41 @@ public class ErrorCheck {
     }
   }
 
+  public void logInCheck(String email, String password) {
+    Connection con = null;
+    PreparedStatement stmtEmail = null;
+    PreparedStatement stmtPass = null;
+    ResultSet rsEmail = null;
+    ResultSet rsPass = null;
+    try {
+      con = BaseDatabase.getConnection();
+      stmtEmail = con.prepareStatement("SELECT * FROM customer WHERE email = ?");
+      stmtPass = con.prepareStatement("SELECT * FROM customer WHERE password = ?");
+      stmtEmail.setString(1, email);
+      rsEmail = stmtEmail.executeQuery();
+      rsPass = stmtEmail.executeQuery();
+      if(!rsEmail.next()) {this.errors.add("そのメールアドレスは登録されています");}
+      if(!rsPass.next()) {this.errors.add("パスワードが間違っています");}
+    } catch(SQLException e) {
+      e.printStackTrace();
+    } catch(Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if(rsPass != null) {rsPass.close();}
+        if(rsEmail != null) {rsEmail.close();}
+        if(stmtPass != null) {stmtPass.close();}
+        if(stmtEmail != null) {stmtEmail.close();}
+        if(con != null) {con.close();}
+      } catch(SQLException e) {
+        e.printStackTrace();
+      } catch(Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+
   public boolean hasErrors() {
     return !this.errors.isEmpty();
   }
