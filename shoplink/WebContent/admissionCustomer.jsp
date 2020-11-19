@@ -14,35 +14,13 @@
 <h1>会員情報入力</h1>
 ${errors}
 <form action="InsertCustomer" method="POST">
-<table>
-<tr>
-<th align="right">名前：</th>
-<td><input type="text" name="name" size="35" maxlength="15" placeholder="名前"></td>
-</tr>
-<tr>
-<th align="right">メールアドレス：</th>
-<td><input type="email" name="email" size="35" maxlength="35"></td>
-</tr>
-<tr>
-<th align="right">パスワード<small>(８文字以上)</small>：</th>
-<td><input type="password" name="password" size="35" minlength="8" maxlength="15"></td>
-<tr>
-<th align="right">パスワード<small>(確認用)</small>：</th>
-<td><input type="password" name="validation" size="35" minlength="8" maxlength="15"></td>
-</tr>
-</tr>
-<tr>
-<th align="right">住所：</th>
-<td><input type="text" name="address" size="35" maxlength="25"></td>
-</tr>
-<tr>
-<th align="right">電話番号：</th>
-<td><input type="tel" name="tel" size="35" maxlength="15"></td>
-</tr>
-<tr>
-<td><input type="submit" value="登録"></td>
-</tr>
-</table>
+<input type="text" name="name" size="35" maxlength="15" placeholder="名前">
+<input type="email" name="email" size="35" maxlength="35" placeholder="メールアドレス">
+<input type="password" name="password" size="35" minlength="8" maxlength="15" placeholder="パスワード(8~15文字)">
+<input type="password" name="validation" size="35" minlength="8" maxlength="15" placeholder="パスワード(確認用)">
+<input type="text" name="address" size="35" maxlength="25" placeholder="住所">
+<input type="tel" name="tel" size="35" maxlength="15" placeholder="電話番号">
+<input type="submit" value="登録" class="btn">
 </form>
 </section>
 </body>

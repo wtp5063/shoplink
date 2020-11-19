@@ -34,8 +34,9 @@ a:hover{
 }
 
 .admission {
-	width:60%;
+	width:25rem;
 	margin:0 auto;
+	text-align:center;
 }
 
 .admission h1{
@@ -43,6 +44,12 @@ a:hover{
 }
 
 .admission input{
+	width:20rem;
 	height:2rem;
 	margin:0.2rem;
+}
+
+.addmission btn{
+	width:20rem;
+	height:2rem;
 }
