@@ -11,7 +11,7 @@ import database.BaseDatabase;
 
 public class ErrorCheck {
   private List<String> errors;
-  private ErrorCheck() {
+  public ErrorCheck() {
     this.errors = new ArrayList<String>();
   }
 
