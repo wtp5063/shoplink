@@ -32,7 +32,7 @@ public class ErrorCheck {
   }
 
   public void passwordCheck(String value1, String value2) {
-    Pattern p = Pattern.compile("[a-zA-Z]+\\d+[\\./_\\-]*{8,15}");
+    Pattern p = Pattern.compile("^(?=.*[a-zA-Z])(?=.*[0-9])[(a-zA-Z0-9(\\.\\-/_)*]{8,15}$");
     Matcher m = p.matcher(value1);
     if(!m.matches()){
       this.errors.add("パスワードは半角英数字の組み合わせと記号(.-/_)がご利用頂けます");
@@ -76,7 +76,7 @@ public class ErrorCheck {
     StringBuffer buff = new StringBuffer();
     buff.append("<ul style='color:red'>");
     for(String error : this.errors) {
-      buff.append("<li>" + error + "<li>");
+        buff.append("<li>" + error + "</li>");
     }
     buff.append("</ul>");
     return buff.toString();
