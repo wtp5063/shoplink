@@ -74,7 +74,7 @@ public class ErrorCheck {
 
   public String errorList() {
     StringBuffer buff = new StringBuffer();
-    buff.append("<ul style='color:red'>");
+    buff.append("<ul class='errors'>");
     for(String error : this.errors) {
         buff.append("<li>" + error + "</li>");
     }

@@ -9,7 +9,7 @@
 <body>
 <section class="admisson">
 <h1>会員情報入力</h1>
-<p class="error">${requestScope['errors']}</p>
+${errors}
 <form action="InsertCustomer" method="POST">
 <table>
 <tr>
