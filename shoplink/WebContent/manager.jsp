@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>管理者ページ</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="reset.css">
 </head>
 <body>
 <h1>管理者ページ</h1>

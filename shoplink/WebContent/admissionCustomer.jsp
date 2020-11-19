@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>会員情報入力画面</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="reset.css">
 </head>
 <body>
 <section class="admisson">
