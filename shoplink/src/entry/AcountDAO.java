@@ -34,6 +34,7 @@ public class AcountDAO extends HttpServlet {
       request.setAttribute("errors", eCheck.errorList());
       RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
       disp.forward(request, response);
+      return;
     }
 
 	  Connection con = null;
@@ -45,8 +46,8 @@ public class AcountDAO extends HttpServlet {
 	    stmt.setString(1, email);
 	    stmt.setString(2, password);
 	    rs = stmt.executeQuery();
-	    int admin = rs.getInt("admin");
 	    if(rs.next()) {
+	      int admin = rs.getInt("admin");
 	      if(admin == 1) {
 	        RequestDispatcher disp = request.getRequestDispatcher("manager.jsp");
 	        disp.forward(request, response);

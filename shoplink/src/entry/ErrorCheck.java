@@ -82,7 +82,7 @@ public class ErrorCheck {
       stmtPass.setString(1, password);
       rsEmail = stmtEmail.executeQuery();
       rsPass = stmtPass.executeQuery();
-      if(!rsEmail.next()) {this.errors.add("そのメールアドレスは登録されています");}
+      if(!rsEmail.next()) {this.errors.add("そのメールアドレスは登録されていません");}
       if(!rsPass.next()) {this.errors.add("パスワードが間違っています");}
     } catch(SQLException e) {
       e.printStackTrace();

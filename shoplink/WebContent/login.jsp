@@ -13,7 +13,7 @@
 <section class="admission">
 <h1>会員情報入力</h1>
 ${errors}
-<form action="AcountDAO" method="POST">
+<form action="LogIn" method="POST">
 <input type="email" name="email" size="35" maxlength="35" placeholder="メールアドレス">
 <input type="password" name="password" size="35" minlength="8" maxlength="15" placeholder="パスワード">
 <input type="submit" value="ログイン" class="btn">
