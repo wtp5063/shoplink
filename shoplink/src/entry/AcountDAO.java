@@ -28,6 +28,14 @@ public class AcountDAO extends HttpServlet {
 	  String password = request.getParameter("password");
 	  String sql = "SELECT * FROM customer WHERE email = ? AND password = ?";
 
+	  ErrorCheck eCheck = new ErrorCheck();
+    eCheck.logInCheck(email, password);
+    if(eCheck.hasErrors()) {
+      request.setAttribute("errors", eCheck.errorList());
+      RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
+      disp.forward(request, response);
+    }
+
 	  Connection con = null;
 	  PreparedStatement stmt = null;
 	  ResultSet rs = null;

@@ -79,8 +79,9 @@ public class ErrorCheck {
       stmtEmail = con.prepareStatement("SELECT * FROM customer WHERE email = ?");
       stmtPass = con.prepareStatement("SELECT * FROM customer WHERE password = ?");
       stmtEmail.setString(1, email);
+      stmtPass.setString(1, password);
       rsEmail = stmtEmail.executeQuery();
-      rsPass = stmtEmail.executeQuery();
+      rsPass = stmtPass.executeQuery();
       if(!rsEmail.next()) {this.errors.add("そのメールアドレスは登録されています");}
       if(!rsPass.next()) {this.errors.add("パスワードが間違っています");}
     } catch(SQLException e) {
