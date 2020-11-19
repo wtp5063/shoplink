@@ -9,7 +9,7 @@
 <body>
 <section class="admisson">
 <h1>会員情報入力</h1>
-<p class="error">${param['errors']}</p>
+<p class="error">${requestScope['errors']}</p>
 <form action="InsertCustomer" method="POST">
 <table>
 <tr>
@@ -23,6 +23,10 @@
 <tr>
 <th align="right">パスワード<small>(８文字以上)</small>：</th>
 <td><input type="password" name="password" size="35" minlength="8" maxlength="15"></td>
+<tr>
+<th align="right">パスワード<small>(確認用)</small>：</th>
+<td><input type="password" name="validation" size="35" minlength="8" maxlength="15"></td>
+</tr>
 </tr>
 <tr>
 <th align="right">住所：</th>

@@ -28,7 +28,7 @@ public class ErrorCheck {
   }
 
   public void passwordCheck(String value1, String value2) {
-    if(!value1.matches("^(?=.*[a-z])(?=.*[0-9])[\\w\\.-/_]{8, 15}$")) {
+    if(!value1.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!-/:-@[-`{-~])[!-~]{8,48}$")) {
       this.errors.add("パスワードは半角英数字の組み合わせと記号(.-/_)がご利用頂けます");
     } else if(!(value1 == value2)) {
       this.errors.add("パスワードが一致しません");
