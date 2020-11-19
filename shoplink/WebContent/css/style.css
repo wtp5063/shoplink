@@ -30,9 +30,19 @@ a:hover{
 
 .errors{
 	color:red;
+	font-size:0.7rem;
 }
 
-.admisson {
+.admission {
 	width:60%;
 	margin:0 auto;
+}
+
+.admission h1{
+	font-size:2.5rem;
+}
+
+.admission input{
+	height:2rem;
+	margin:0.2rem;
 }

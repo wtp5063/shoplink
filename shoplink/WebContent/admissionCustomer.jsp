@@ -10,14 +10,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 </head>
 <body>
-<section class="admisson">
+<section class="admission">
 <h1>会員情報入力</h1>
 ${errors}
 <form action="InsertCustomer" method="POST">
 <table>
 <tr>
 <th align="right">名前：</th>
-<td><input type="text" name="name" size="35" maxlength="15"></td>
+<td><input type="text" name="name" size="35" maxlength="15" placeholder="名前"></td>
 </tr>
 <tr>
 <th align="right">メールアドレス：</th>
