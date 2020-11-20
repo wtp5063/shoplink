@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>ShopLink:トップページ</title>
 <jsp:include page="headerTop.jsp"/>
 </body>

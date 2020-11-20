@@ -13,7 +13,7 @@
 </head>
 <body>
 <section class="admission">
-<h1>会員情報入力</h1>
+<h2>会員情報入力</h2>
 ${errors}
 <form action="LogIn" method="POST">
 <input type="email" name="email" size="35" maxlength="35" placeholder="メールアドレス">
