@@ -12,12 +12,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 </head>
 <body>
-<h1>ShopLink</h1>
-<c:if test="${account != null}">
-<a href="customerInformation.jsp" class="account">マイページ<br><small>(${fn:escapeXml(account.getName())}さん)</small></a>
-</c:if>
-<c:if test="${account == null}">
-<a href="login.jsp" class="account">ログイン</a>
-</c:if>
+<jsp:include page="headerTop.jsp" />
 </body>
 </html>
