@@ -20,7 +20,7 @@ import database.BaseDatabase;
  * Servlet implementation class LogIn
  */
 @WebServlet("/LogIn")
-public class AcountDAO extends HttpServlet {
+public class LogIn extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
