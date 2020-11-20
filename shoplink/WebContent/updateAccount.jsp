@@ -22,7 +22,7 @@
 <section class="admission">
 <h2>会員情報編集</h2>
 ${errors}
-<form action="UpdateCustomer" method="POST">
+<form action="UpdateServlet" method="POST">
 <input type="text" name="name" size="35" maxlength="15" placeholder="名前">
 <input type="email" name="email" size="35" maxlength="35" placeholder="メールアドレス">
 <input type="password" name="password" size="35" minlength="8" maxlength="15" placeholder="パスワード(8~15文字)">
