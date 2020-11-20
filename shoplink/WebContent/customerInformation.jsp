@@ -15,7 +15,7 @@
 <p><small>メールアドレス：</small>${fn:escapeXml(account.getEmail())}</p>
 <p><small>住所：</small>${fn:escapeXml(account.getAddress())}</p>
 <p><small>電話番号：</small>${fn:escapeXml(account.getTel())}</p>
-<a href="updateAcount.jsp"><input type="button" value="会員情報編集"></a>
+<a href="updateAccount.jsp"><input type="button" value="会員情報編集"></a>
 <form action="LogOutServlet" method="post">
 <input type="submit" value="ログアウト">
 </form>

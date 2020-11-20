@@ -4,15 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <title>会員情報入力画面</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/reset.css">

@@ -74,9 +74,8 @@ public class ErrorCheck {
     ResultSet rs = null;
     try {
       con = BaseDatabase.getConnection();
-      stmt = con.prepareStatement("SELECT * FROM customer WHERE email = ? AND password = ?");
+      stmt = con.prepareStatement("SELECT * FROM customer WHERE email = ?");
       stmt.setString(1, email);
-      stmt.setString(2, password);
       rs = stmt.executeQuery();
       if(rs.next()) {
         if(!password.equals(rs.getString("password"))) {
