@@ -7,6 +7,7 @@ public class CustomerDTO implements Serializable {
   private String email;
   private String address;
   private String tel;
+
   public String getName() {
     return name;
   }

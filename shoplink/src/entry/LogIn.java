@@ -26,7 +26,6 @@ public class LogIn extends HttpServlet {
 		// TODO Auto-generated method stub
 	  String email = request.getParameter("email");
 	  String password = request.getParameter("password");
-	  String sql = "SELECT * FROM customer WHERE email = ? AND password = ?";
 
 	  ErrorCheck eCheck = new ErrorCheck();
     eCheck.logInCheck(email, password);
@@ -40,6 +39,7 @@ public class LogIn extends HttpServlet {
 	  Connection con = null;
 	  PreparedStatement stmt = null;
 	  ResultSet rs = null;
+	  String sql = "SELECT * FROM customer WHERE email = ? AND password = ?";
 	  try {
 	    con = BaseDatabase.getConnection();
 	    stmt = con.prepareStatement(sql);
