@@ -14,7 +14,8 @@
 <body>
 <header class="header">
 <h1><a href="index.jsp">ShopLink</a></h1>
-<a href="ShoppingCart.jsp" class="cart">ショッピングカート</a>
+<a href="ShoppingCart.jsp" class="cart">商品追加</a>
+<a href="ShoppingCart.jsp" class="account">顧客管理</a>
 </header>
 <h2>管理者ページ</h2>
 <jsp:include page="footer.jsp" />

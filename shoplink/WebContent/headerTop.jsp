@@ -12,7 +12,7 @@
 <h1><a href="index.jsp">ShopLink</a></h1>
 <a href="ShoppingCart.jsp" class="cart">ショッピングカート</a>
 <c:if test="${account != null}">
-<a href="customerInformation.jsp" class="account">マイページ<br><small>(${fn:escapeXml(account.getName())}さん)</small></a>
+<a href="customerInformation.jsp" class="account">マイページ<br>(${fn:escapeXml(account.getName())}さん)s</a>
 </c:if>
 <c:if test="${account == null}">
 <a href="login.jsp" class="account">ログイン</a>
