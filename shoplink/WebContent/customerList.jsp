@@ -12,7 +12,7 @@ SELECT * FROM customer WHERE admin = 2
 <head>
 <meta charset="UTF-8">
 <title>顧客リスト</title>
-<jsp:include page="headerTop.jsp" />
+<jsp:include page="headerMng.jsp" />
 <section class="customerList">
 <table>
 <tr>
