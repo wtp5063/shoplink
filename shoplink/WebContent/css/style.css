@@ -25,6 +25,9 @@ a:hover{
   text-decoration:none;
 }
 
+body{
+  background-color:#ffffe0
+}
 
 .header{
  height:4rem;
@@ -32,7 +35,7 @@ a:hover{
  position:relative;
 }
 
-.header h1{
+.header h1 a{
 	font-size:3rem;
 	color:yellow;
 	display:inline-block;
@@ -42,7 +45,7 @@ a:hover{
 }
 
 .header .account, .header .cart{
-	color:white;
+	color:#fffffc;
   position:absolute;
   float:right;
 }
@@ -63,22 +66,39 @@ a:hover{
 }
 
 .admission {
-	width:25rem;
+	padding:2rem;
+	width:30rem;
 	margin:0 auto;
 	text-align:center;
+	background-color:#fffffc;
 }
 
-.admission h1{
+.admission h2{
 	font-size:2.5rem;
+	padding-bottom:0.5rem;
 }
 
 .admission input{
 	width:20rem;
 	height:2rem;
-	margin:0.2rem;
+	margin:0.5rem;
 }
 
-.addmission btn{
+.admission btn{
 	width:20rem;
 	height:2rem;
+}
+
+.admission p{
+	padding:0.5rem;
+}
+
+
+footer{
+	height:3rem;
+	background-color:#006400;
+	color:#fffffc;
+	display:flex;
+	align-items:center;
+  justify-content:center;
 }

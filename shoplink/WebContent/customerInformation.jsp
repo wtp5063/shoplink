@@ -7,19 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>顧客情報</title>
-</head>
-<body>
-<section>
+<jsp:include page="headerTop.jsp"></jsp:include>
+<section class="admission">
 <h2>マイページ</h2>
-<p><small>氏名：</small>${fn:escapeXml(account.getName())}</p>
-<p><small>メールアドレス：</small>${fn:escapeXml(account.getEmail())}</p>
-<p><small>住所：</small>${fn:escapeXml(account.getAddress())}</p>
-<p><small>電話番号：</small>${fn:escapeXml(account.getTel())}</p>
+<p>氏名：${fn:escapeXml(account.getName())}</p>
+<p>email：${fn:escapeXml(account.getEmail())}</p>
+<p>住所：${fn:escapeXml(account.getAddress())}</p>
+<p>電話番号：${fn:escapeXml(account.getTel())}</p>
 <a href="updateAccount.jsp"><input type="button" value="会員情報編集"></a>
 <form action="LogOutServlet" method="post">
 <input type="submit" value="ログアウト">
 </form>
 </section>
 
-</body>
-</html>
+<jsp:include page="footer.jsp" />

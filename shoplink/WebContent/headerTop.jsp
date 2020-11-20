@@ -9,7 +9,7 @@
 </head>
 <body>
 <header class="header">
-<h1>ShopLink</h1>
+<h1><a href="index.jsp">ShopLink</a></h1>
 <a href="ShoppingCart.jsp" class="cart">ショッピングカート</a>
 <c:if test="${account != null}">
 <a href="customerInformation.jsp" class="account">マイページ<br><small>(${fn:escapeXml(account.getName())}さん)</small></a>

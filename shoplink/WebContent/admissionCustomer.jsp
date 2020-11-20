@@ -5,13 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>会員情報入力画面</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/reset.css">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-</head>
-<body>
+<jsp:include page="headerTop.jsp" />
 <section class="admission">
-<h1>会員情報入力</h1>
+<h2>会員情報入力</h2>
 ${errors}
 <form action="InsertCustomer" method="POST">
 <input type="text" name="name" size="35" maxlength="15" placeholder="名前">
@@ -23,5 +19,4 @@ ${errors}
 <input type="submit" value="登録" class="btn">
 </form>
 </section>
-</body>
-</html>
+<jsp:include page="footer.jsp" />

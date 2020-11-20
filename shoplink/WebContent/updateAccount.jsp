@@ -5,11 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>会員情報入力画面</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/reset.css">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-</head>
-<body>
+<jsp:include page="headerTop.jsp"></jsp:include>
 <section class="admission">
 <h2>会員情報編集</h2>
 ${errors}
@@ -23,7 +19,4 @@ ${errors}
 <input type="submit" value="登録" class="btn">
 </form>
 </section>
-</body>
-</html>
-</body>
-</html>
+<jsp:include page="footer.jsp"></jsp:include>

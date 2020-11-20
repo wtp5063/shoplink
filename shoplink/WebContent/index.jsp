@@ -8,5 +8,4 @@
 <meta charset="UTF-8">
 <title>ShopLink:トップページ</title>
 <jsp:include page="headerTop.jsp"/>
-</body>
-</html>
+<jsp:include page="footer.jsp" />
