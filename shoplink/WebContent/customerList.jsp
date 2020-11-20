@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<sql:setDataSource var="db" dataSource="jdbc/customer" />
+<sql:setDataSource var="db" url="jdbc:mysql://localhost:3306/customer"
+    user="root" password="root" driver="com.mysql.cj.jdbc.Driver" />
 <sql:query var="rs" dataSource="${db}">
-SELECT * FROM customer
+SELECT * FROM customer WHERE admin = 2
 </sql:query>
 <!DOCTYPE html>
 <html>
@@ -12,9 +13,10 @@ SELECT * FROM customer
 <meta charset="UTF-8">
 <title>顧客リスト</title>
 <jsp:include page="headerTop.jsp" />
-<table border="1">
+<section class="customerList">
+<table>
 <tr>
-<th colspan="7">顧客リスト</th>
+<th colspan="7"><h2>顧客リスト</h2></th>
 </tr>
 <c:forEach var="row" items="${rs.rows}">
 <tr>
@@ -43,6 +45,7 @@ SELECT * FROM customer
 </tr>
 </c:forEach>
 </table>
+</section>
 <jsp:include page="footer.jsp" />
 </body>
 </html>

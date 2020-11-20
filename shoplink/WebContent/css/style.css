@@ -93,6 +93,17 @@ body{
 	padding:0.5rem;
 }
 
+.customerList{
+	padding-top:2rem;
+	padding-bottom:2rem;
+  width:45rem;
+  margin:0 auto;
+  text-align:center;
+  background-color:#fffffc;
+}
+.customerList td{
+	padding:0.4rem;
+}
 
 footer{
 	height:3rem;
