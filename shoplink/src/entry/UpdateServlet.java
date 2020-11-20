@@ -3,6 +3,7 @@ package entry;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import database.BaseDatabase;
 
@@ -45,6 +47,7 @@ public class UpdateServlet extends HttpServlet {
 
     Connection con = null;
     PreparedStatement stmt = null;
+    ResultSet rs = null;
     try {
       con = BaseDatabase.getConnection();
       stmt = con.prepareStatement("UPDATE customer SET name=?,email=?,password=?,address=?,tel=?)");
@@ -54,6 +57,18 @@ public class UpdateServlet extends HttpServlet {
       stmt.setString(4, address);
       stmt.setString(5, tel);
       stmt.executeUpdate();
+      rs = stmt.executeQuery();
+      if(rs.next()) {
+        CustomerDTO dto = new CustomerDTO();
+        dto.setName(rs.getString("name"));
+        dto.setEmail(rs.getString("email"));
+        dto.setAddress(rs.getString("address"));
+        dto.setTel(rs.getString("tel"));
+        HttpSession session = request.getSession();
+        session.setAttribute("account", dto);
+        RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
+        disp.forward(request, response);
+      }
     } catch(SQLException e) {
       e.printStackTrace();
     } catch(Exception e) {
@@ -69,8 +84,5 @@ public class UpdateServlet extends HttpServlet {
       }
     }
 
-    RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
-    disp.forward(request, response);
   }
-
 }
