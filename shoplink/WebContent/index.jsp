@@ -13,5 +13,11 @@
 </head>
 <body>
 <h1>ShopLink</h1>
+<c:if test="${account} != null">
+<a href="customerInformation.jsp" class="account">マイページ<br><small>(${acount.getName()}さん)</small></a>
+</c:if>
+<c:if test="${account} == null">
+<a href="login.jsp" class="account">ログイン</a>
+</c:if>
 </body>
 </html>
