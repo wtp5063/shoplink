@@ -24,25 +24,23 @@ public class AddProduct extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	  Part part = request.getPart("img");
+	  Part part = request.getPart("images");
 	  String fileName = part.getSubmittedFileName();
 	  part.write(getServletContext().getRealPath("/images") + "/" + fileName);
 
 	  String title = request.getParameter("title");
 	  String artist = request.getParameter("artist");
 	  String price = request.getParameter("price");
-	  String category = request.getParameter("category");
 
 	  Connection con = null;
 	  PreparedStatement stmt = null;
 	  try {
 	    con = BaseDatabase.getConnection();
-	    stmt = con.prepareStatement("INSERT INTO customer (title,artist,price,category,images) VALUE (?,?,?,?,?)");
+	    stmt = con.prepareStatement("INSERT INTO customer (title,artist,price,images) VALUE (?,?,?,?)");
 	    stmt.setString(1, title);
 	    stmt.setString(2, artist);
 	    stmt.setString(3, price);
-	    stmt.setString(4, category);
-	    stmt.setString(5, fileName);
+	    stmt.setString(4, fileName);
 	    stmt.executeUpdate();
 	    request.setAttribute("msg", "<p class='errors'>アップロード完了</p>");
 	  } catch(SQLException e) {
