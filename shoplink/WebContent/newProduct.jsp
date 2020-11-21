@@ -10,7 +10,7 @@
 
 <section class="admission">
 <h2>新規商品追加</h2>
-<p>${requestScope['msg']}</p>
+<p class="errors">${requestScope['msg']}</p>
 <form action="AddProduct" method="post" enctype="multipart/form-data">
 <input type="file" name="images" required>
 <input type="text" name="title" placeholder="タイトル" required>

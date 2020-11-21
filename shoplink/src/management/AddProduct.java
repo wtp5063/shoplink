@@ -26,7 +26,7 @@ public class AddProduct extends HttpServlet {
 		// TODO Auto-generated method stub
 	  Part part = request.getPart("images");
 	  String fileName = part.getSubmittedFileName();
-	  part.write(getServletContext().getRealPath("/WEB-INF/images") + "/" + fileName);
+	  part.write(getServletContext().getRealPath("/images") + "/" + fileName);
 
 	  String title = request.getParameter("title");
 	  String artist = request.getParameter("artist");
@@ -42,7 +42,7 @@ public class AddProduct extends HttpServlet {
 	    stmt.setString(3, price);
 	    stmt.setString(4, fileName);
 	    stmt.executeUpdate();
-	    request.setAttribute("msg", "<p class='errors'>アップロード完了</p>");
+	    request.setAttribute("msg", "アップロード完了");
 	  } catch(SQLException e) {
 	    e.printStackTrace();
 	  } catch(Exception e) {
