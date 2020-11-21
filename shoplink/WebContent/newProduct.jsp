@@ -10,11 +10,12 @@
 
 <section class="admission">
 <h2>新規商品追加</h2>
+<p>${requestScope['msg']}</p>
 <form action="AddProduct" method="post" enctype="multipart/form-data">
 <input type="file" name="images" required>
-<input type="text" name="title" required>
-<input type="text" name="artist"required>
-<input type="number" name="price" required>
+<input type="text" name="title" placeholder="タイトル" required>
+<input type="text" name="artist" placeholder="アーティスト" required>
+<input type="text" name="price" placeholder="プライス" required>
 <input type="submit" value="登録">
 </form>
 </section>

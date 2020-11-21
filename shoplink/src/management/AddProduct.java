@@ -19,14 +19,14 @@ import database.BaseDatabase;
  * Servlet implementation class addProduct
  */
 @WebServlet("/AddProduct")
-@MultipartConfig(location = "/images")
+@MultipartConfig(location = "/tmp/")
 public class AddProduct extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	  Part part = request.getPart("images");
 	  String fileName = part.getSubmittedFileName();
-	  part.write(getServletContext().getRealPath("/images") + "/" + fileName);
+	  part.write(getServletContext().getRealPath("/WEB-INF/images") + "/" + fileName);
 
 	  String title = request.getParameter("title");
 	  String artist = request.getParameter("artist");

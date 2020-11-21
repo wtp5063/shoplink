@@ -7,6 +7,6 @@
 <body>
 <header class="header">
 <h1><a href="index.jsp">ShopLink</a></h1>
-<a href="addProduct.jsp" class="cart">商品追加</a>
+<a href="newProduct.jsp" class="cart">商品追加</a>
 <a href="customerList.jsp" class="account">顧客管理</a>
 </header>
