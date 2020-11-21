@@ -31,14 +31,14 @@ SELECT * FROM customer WHERE admin = 2
 </form>
 </td>
 <td>
-<form action="EditCustomer" method="post">
-<input type="hidden" name="name" value="${row.name}">
+<form action="editCustomer.jsp" method="post">
+<input type="hidden" name="id" value="${row.id}">
 <input type="submit" value="編集">
 </form>
 </td>
 <td>
 <form action="DeleteCustomer" method="post">
-<input type="hidden" name="name" value="${row.name}">
+<input type="hidden" name="name" value="${row.id}">
 <input type="submit" value="削除">
 </form>
 </td>
