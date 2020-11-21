@@ -36,7 +36,7 @@ public class AddProduct extends HttpServlet {
 	  PreparedStatement stmt = null;
 	  try {
 	    con = BaseDatabase.getConnection();
-	    stmt = con.prepareStatement("INSERT INTO customer (title,artist,price,images) VALUE (?,?,?,?)");
+	    stmt = con.prepareStatement("INSERT INTO products (title,artist,price,images) VALUE (?,?,?,?)");
 	    stmt.setString(1, title);
 	    stmt.setString(2, artist);
 	    stmt.setString(3, price);
