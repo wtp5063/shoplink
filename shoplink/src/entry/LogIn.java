@@ -53,6 +53,7 @@ public class LogIn extends HttpServlet {
 	        disp.forward(request, response);
 	      } else {
 	        CustomerDTO dto = new CustomerDTO();
+	        dto.setId(rs.getInt("id"));
 	        dto.setName(rs.getString("name"));
 	        dto.setEmail(rs.getString("email"));
 	        dto.setAddress(rs.getString("address"));

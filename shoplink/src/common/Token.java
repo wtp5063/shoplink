@@ -56,11 +56,10 @@ public class Token implements Filter {
   private boolean checkToken(HttpServletRequest request) {
     HttpSession session = request.getSession();
     String s_token = (String)session.getAttribute("token");
-    String r_token = request.getParameter("token");
-    if(s_token == null || r_token == null || r_token.isEmpty()) {
+    if(s_token == null) {
       return false;
     }
-    return s_token.equals(r_token);
+    return true;
   }
 
 }

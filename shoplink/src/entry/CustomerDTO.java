@@ -3,6 +3,7 @@ package entry;
 import java.io.Serializable;
 
 public class CustomerDTO implements Serializable {
+  private int id;
   private String name;
   private String email;
   private String address;
@@ -31,6 +32,12 @@ public class CustomerDTO implements Serializable {
   }
   public void setTel(String tel) {
     this.tel = tel;
+  }
+  public int getId() {
+    return id;
+  }
+  public void setId(int id) {
+    this.id = id;
   }
 
 }

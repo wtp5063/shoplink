@@ -18,5 +18,9 @@ ${errors}
 <input type="tel" name="tel" size="35" maxlength="15" placeholder="電話番号">
 <input type="submit" value="登録" class="btn">
 </form>
+<form action="UnregisterServlet" method="post">
+<input type="hidden" name="id" value="${sessionScope['account'].getId()}">
+<input type="submit" value="登録解除">
+</form>
 </section>
 <jsp:include page="footer.jsp"></jsp:include>
