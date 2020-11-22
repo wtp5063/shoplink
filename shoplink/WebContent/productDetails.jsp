@@ -39,9 +39,9 @@ SELECT * FROM products WHERE id = ?
 <p>売り切れ</p>
 </c:if>
 <c:if test="${sessionScope.account.getAdmin() == 1}">
-<form action="SeoldOutServlet" method="post">
+<form action="editProduct.jsp" method="post">
 <input type="hidden" name="id" value="${param.id}">
-<input type="submit" value="売り切れ">
+<input type="submit" value="編集">
 </form>
 </c:if>
 </div>
