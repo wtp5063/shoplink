@@ -8,4 +8,5 @@
 <meta charset="UTF-8">
 <title>ShopLink:トップページ</title>
 <jsp:include page="headerTop.jsp"/>
+<img src="${pageContext.request.contextPath}/images/zep4.jpg">
 <jsp:include page="footer.jsp" />

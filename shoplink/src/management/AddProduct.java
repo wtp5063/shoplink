@@ -26,7 +26,7 @@ public class AddProduct extends HttpServlet {
 		// TODO Auto-generated method stub
 	  Part part = request.getPart("images");
 	  String fileName = part.getSubmittedFileName();
-	  part.write("/Users/tanakamasato/Document/images/" + fileName);
+	  part.write(getServletContext().getRealPath("/images")+ "/" + fileName);
 	  System.out.println(getServletContext().getRealPath("/images") + "/" + fileName);
 	  String title = request.getParameter("title");
 	  String artist = request.getParameter("artist");
