@@ -49,6 +49,11 @@ public class LogIn extends HttpServlet {
 	    if(rs.next()) {
 	      int admin = rs.getInt("admin");
 	      if(admin == 1) {
+	        CustomerDTO dto = new CustomerDTO();
+	        dto.setName(rs.getString("name"));
+	        dto.setAdmin(rs.getInt("admin"));
+	        HttpSession session = request.getSession();
+          session.setAttribute("account", dto);
 	        RequestDispatcher disp = request.getRequestDispatcher("manager.jsp");
 	        disp.forward(request, response);
 	      } else {

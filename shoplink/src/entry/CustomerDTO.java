@@ -8,6 +8,7 @@ public class CustomerDTO implements Serializable {
   private String email;
   private String address;
   private String tel;
+  private int admin;
 
   public String getName() {
     return name;
@@ -38,6 +39,12 @@ public class CustomerDTO implements Serializable {
   }
   public void setId(int id) {
     this.id = id;
+  }
+  public int getAdmin() {
+    return admin;
+  }
+  public void setAdmin(int admin) {
+    this.admin = admin;
   }
 
 }

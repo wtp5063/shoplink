@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<sql:setDataSource var="db" url="jdbc:mysql://localhost:3306/customer"
+<sql:setDataSource var="db" url="jdbc:mysql://localhost:3306/customer" 
   user="root" password="root" driver="com.mysql.cj.jdbc.Driver" />
 <sql:query var="rs" dataSource="${db}">
 SELECT * FROM customer WHERE id = ?

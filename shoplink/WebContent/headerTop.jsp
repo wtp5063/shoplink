@@ -10,7 +10,12 @@
 <body>
 <header class="header">
 <h1><a href="index.jsp">ShopLink</a></h1>
+<c:if test="${account.getAdmin() != 1}">
 <a href="ShoppingCart.jsp" class="cart">ショッピングカート</a>
+</c:if>
+<c:if test="${account.getAdmin() == 1}">
+<a href="manager.jsp" class="cart">ホームに戻る</a>
+</c:if>
 <c:if test="${account != null}">
 <a href="customerInformation.jsp" class="account">マイページ<br>(${fn:escapeXml(account.getName())}さん)</a>
 </c:if>

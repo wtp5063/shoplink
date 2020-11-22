@@ -6,35 +6,48 @@
 <sql:setDataSource var="db" url="jdbc:mysql://localhost:3306/customer"
   user="root" password="root" driver="com.mysql.cj.jdbc.Driver"/>
 <sql:query var="rs" dataSource="${db}">
-SELECT * FROM products
+SELECT * FROM products WHERE id = ?
+<sql:param value="${param.id}" />
 </sql:query>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>管理者ページ</title>
-<jsp:include page="headerMng.jsp" />
+<title>商品詳細画面</title>
+<jsp:include page="headerTop.jsp"></jsp:include>
 <div class="box">
-<jsp:include page="aside.jsp" />
+<jsp:include page="aside.jsp"></jsp:include>
 <main>
 <div class="list">
 <c:forEach var="list" items="${rs.rows}">
 <div class="product">
 <div class="img">
-<a href="productDetails.jsp?id=${fn:escapeXml(list.id)}">
 <img src="${pageContext.request.contextPath}/images/${list.images}">
-</a>
 </div>
 <div class="description">
-<p><a href="ProductServlet">${fn:escapeXml(list.title)}</a></p>
-<form action="CategoryServlet" method="post">
+<p>${fn:escapeXml(list.title)}</p>
 <p>${fn:escapeXml(list.artist)}</p>
-</form>
+<c:if test="${fn:escapeXml(list.price) != 0}">
 <p>${fn:escapeXml(list.price)}円</p>
+<form action="CartServlet" method="post">
+<input type="hidden" name="id" value="${param.id}">
+<input type="number" name="quantity" value="1">
+<input type="submit" value="購入">
+</form>
+</c:if>
+<c:if test="${fn:escapeXml(list.price) == 0}">
+<p>売り切れ</p>
+</c:if>
+<c:if test="${sessionScope.account.getAdmin() == 1}">
+<form action="SeoldOutServlet" method="post">
+<input type="hidden" name="id" value="${param.id}">
+<input type="submit" value="売り切れ">
+</form>
+</c:if>
 </div>
 </div>
 </c:forEach>
 </div>
 </main>
 </div>
-<jsp:include page="footer.jsp" />
+<jsp:include page="footer.jsp"></jsp:include>
