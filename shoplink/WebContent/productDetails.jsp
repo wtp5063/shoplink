@@ -31,7 +31,7 @@ SELECT * FROM products WHERE id = ?
 <p>${fn:escapeXml(list.price)}円</p>
 <form action="CartServlet" method="post">
 <input type="hidden" name="id" value="${param.id}">
-<input type="number" name="quantity" value="1">
+<input type="number" name="quantity" value="1" min="1">
 <input type="submit" value="購入">
 </form>
 </c:if>
