@@ -34,13 +34,14 @@ SELECT * FROM products WHERE id = ?
 <input type="submit" value="登録">
 </form>
 <form action="SoldOutServlet" method="post">
-<input type="hidden" name="id" value="${param.id}">
+<input type="hidden" name="id" value="${list.id}">
+<input type="hidden" name="price" value="${list.price}">
 <input type="submit" value="売り切れ">
 </form>
 <form action="DeleteProductServlet" method="post">
-<input type="hidden" name="id" value="${param.id}">
-<input type="hidden" name="images" value="${param.images}">
-<input type="submit" value="売り切れ">
+<input type="hidden" name="id" value="${list.id}">
+<input type="hidden" name="images" value="${list.images}">
+<input type="submit" value="削除">
 </form>
 </div>
 </div>
