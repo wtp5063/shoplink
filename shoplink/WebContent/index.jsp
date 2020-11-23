@@ -26,7 +26,7 @@ SELECT * FROM products
 </a>
 </div>
 <div class="description">
-<p><a href="ProductServlet">${fn:escapeXml(list.title)}</a></p>
+<p><a href="productDetails.jsp?id=${fn:escapeXml(list.id)}">${fn:escapeXml(list.title)}</a></p>
 <form action="CategoryServlet" method="post">
 <p>${fn:escapeXml(list.artist)}</p>
 </form>
