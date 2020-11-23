@@ -44,7 +44,7 @@ public class CartServlet extends HttpServlet {
 		    dto.setTitle(rs.getString("title"));
 		    dto.setArtist(rs.getString("artist"));
 		    dto.setPrice(rs.getInt("price"));
-		    dto.setImages(rs.getString("images"));
+		    dto.setImages(rs.getString("images").replace(".jpg", ""));
 		    dto.setQuantity(quantity);
 		    CartLogic.execute(cart, dto);
 		    request.setAttribute("msg", dto.getTitle() + "をカートに追加しました");

@@ -11,7 +11,7 @@
 <header class="header">
 <h1><a href="index.jsp">ShopLink</a></h1>
 <c:if test="${account.getAdmin() != 1}">
-<a href="ShoppingCart.jsp" class="cart">ショッピングカート</a>
+<a href="shoppingCart.jsp" class="cart">ショッピングカート</a>
 </c:if>
 <c:if test="${account.getAdmin() == 1}">
 <a href="manager.jsp" class="cart">ホームに戻る</a>
