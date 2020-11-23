@@ -49,7 +49,8 @@ public class EditProductServlet extends HttpServlet {
 	      e.printStackTrace();
 	    }
 	  }
-	  request.getRequestDispatcher("manager.jsp").forward(request, response);
+	  request.setAttribute("id", id);
+	  request.getRequestDispatcher("productDetails.jsp").forward(request, response);
 
 	}
 }
