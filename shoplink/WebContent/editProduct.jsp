@@ -37,6 +37,11 @@ SELECT * FROM products WHERE id = ?
 <input type="hidden" name="id" value="${param.id}">
 <input type="submit" value="売り切れ">
 </form>
+<form action="DeleteProductServlet" method="post">
+<input type="hidden" name="id" value="${param.id}">
+<input type="hidden" name="images" value="${param.images}">
+<input type="submit" value="売り切れ">
+</form>
 </div>
 </div>
 </c:forEach>
