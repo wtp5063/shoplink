@@ -32,12 +32,20 @@
 <input type="submit" value="削除">
 </form>
 </c:forEach>
+<c:if test="${sessionScope.totalAmount.subTotal != 0}">
 <div class="cart_total">
-<p>小計：${fn: escapeXml(sessionScope.cart.subTotal)}</p>
-<p>消費税：${fn: escapeXml(sessionScope.cart.taxAmount)}</p>
-<p>送料：${fn: escapeXml(sessionScope.cart.shipping)}</p>
-<p>合計金額：${fn: escapeXml(sessionScope.cart.total)}</p>
+<p>小計：${fn: escapeXml(sessionScope.totalAmount.subTotal)}</p>
+<p>消費税：${fn: escapeXml(sessionScope.totalAmount.taxAmount)}</p>
+<p>送料：${fn: escapeXml(sessionScope.totalAmount.shipping)}</p>
+<p>合計金額：${fn: escapeXml(sessionScope.totalAmount.totalAmount)}</p>
+<form action="ToBuyServlet" method="post">
+<input type="submit" value="購入">
+</form>
 </div>
+</c:if>
+<c:if test="${sessionScope.totalAmount.subTotal == 0}">
+<p><br>商品を追加して下さい</p>
+</c:if>
 </div>
 </main>
 </div>

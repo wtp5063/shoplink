@@ -1,27 +1,39 @@
 package cart;
 
+import java.util.List;
+
 public class CartLogic {
-    private static double tax = 0.08;
 
-  public static void execute(CartDTO cart, ProductDTO product) {
-    cart.getProduct().add(product);
-    cart.setSubTotal(product.getPrice() * product.getQuantity() + cart.getSubTotal());
-    cart.setTaxAmount((int)(cart.getSubTotal() * tax));
-    cart.setTotal(cart.getSubTotal() + cart.getTaxAmount() + cart.getShipping());
+    private double tax;
+    private int taxAmount;
+    private int subTotal;
+    private int total;
+    private int shipping;
+
+    public CartLogic() {
+      this.tax = 0.08;
+      this.taxAmount = 0;
+      this.subTotal = 0;
+      this.shipping = 2000;
+      this.total = 0;
+    }
+
+
+  public TotalAmountDTO execute(CartDTO cart) {
+   List <ProductDTO> products = cart.getProduct();
+   for(ProductDTO dto : products) {
+     this.subTotal = dto.getPrice() * dto.getQuantity() + this.subTotal;
+   }
+   this.taxAmount = (int)(this.subTotal * this.tax);
+   this.total = this.subTotal + this.taxAmount + this.shipping;
+
+   TotalAmountDTO totalAmount = new TotalAmountDTO();
+   totalAmount.setSubTotal(this.subTotal);
+   totalAmount.setTaxAmount(this.taxAmount);
+   totalAmount.setShipping(this.shipping);
+   totalAmount.setTotalAmount(this.total);
+
+   return totalAmount;
+
   }
-
-  public static void delete(CartDTO cart, int price) {
-    cart.setSubTotal(cart.getSubTotal() - price);
-    cart.setTaxAmount((int)(cart.getSubTotal() * tax));
-    cart.setTotal(cart.getSubTotal() + cart.getTaxAmount() + cart.getShipping());
-  }
-
-  public static void update(CartDTO cart, ProductDTO product, int price) {
-    cart.getProduct().add(product);
-    cart.setSubTotal(cart.getSubTotal() - price + (product.getPrice() * product.getQuantity()));
-    cart.setTaxAmount((int)(cart.getSubTotal() * tax));
-    cart.setTotal(cart.getSubTotal() + cart.getTaxAmount() + cart.getShipping());
-  }
-
-
 }

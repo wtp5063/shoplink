@@ -65,8 +65,14 @@ public class LogIn extends HttpServlet {
 	        dto.setTel(rs.getString("tel"));
 	        HttpSession session = request.getSession();
 	        session.setAttribute("account", dto);
+
+	        if(session.getAttribute("login") == null) {
 	        RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
 	        disp.forward(request, response);
+	        } else {
+	          RequestDispatcher disp = request.getRequestDispatcher("orderConfirm.jsp");
+	          disp.forward(request, response);
+	        }
 	      }
 	    }
 	  } catch(SQLException e) {

@@ -34,16 +34,16 @@ public class EditQuantityServlet extends HttpServlet {
 	      product.setImages(dto.getImages());
 	      product.setPrice(dto.getPrice());
 	      product.setQuantity(quantity);
-	      int beforePrice = dto.getPrice() * dto.getQuantity();
 	      itr.remove();
-	      CartLogic.update(cart, product, beforePrice);
 	    }
 	  }
-	  if(product.getImages() != null) {
 
-	    session.setAttribute("cart", cart);
-	    request.setAttribute("msg", product.getTitle() + "の数量を" + quantity + "個に変更しました");
-	  }
+	  cart.getProduct().add(product);
+	  CartLogic logic = new CartLogic();
+	  TotalAmountDTO totalAmount = logic.execute(cart);
+	  session.setAttribute("cart", cart);
+	  session.setAttribute("totalAmount", totalAmount);
+	  request.setAttribute("msg", product.getTitle() + "の数量を" + quantity + "個に変更しました");
 
 	  request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
 

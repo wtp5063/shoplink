@@ -19,8 +19,6 @@ public class DeleteCartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	  int id = Integer.parseInt(request.getParameter("id"));
-	  int price = Integer.parseInt(request.getParameter("price"));
-	  int quantity = Integer.parseInt(request.getParameter("quantity"));
 	  HttpSession session = request.getSession();
 	  CartDTO cart = (CartDTO) session.getAttribute("cart");
 
@@ -31,7 +29,10 @@ public class DeleteCartServlet extends HttpServlet {
 	      itr.remove();
 	    }
 	  }
-	  CartLogic.delete(cart, price * quantity);
+
+	  CartLogic logic = new CartLogic();
+	  TotalAmountDTO totalAmount = logic.execute(cart);
+	  session.setAttribute("totalAmount", totalAmount);
 	  session.setAttribute("cart", cart);
 	  request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
 
