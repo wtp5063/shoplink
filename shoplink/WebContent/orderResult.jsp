@@ -14,7 +14,7 @@
 <main>
 <div class="list">
 <p>注文を完了しました！</p>
-<p>${requestScope.order_id}</p>
+<p>注文番号：${requestScope.order_id}</p>
 </div>
 </main>
 </div>

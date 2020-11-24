@@ -50,15 +50,16 @@ public class OrderServlet extends HttpServlet {
 	    con = BaseDatabase.getConnection();
 	    con.setAutoCommit(false);
 
-	    stmt_order = con.prepareStatement("INSERT INTO order (customer_id, datetime, total_amount) VALUES (?,?,?)");
+	    stmt_order = con.prepareStatement("INSERT INTO new_order (customer_id, datetime, total_amount) VALUES (?,?,?)");
 	    stmt_order.setInt(1, user_id);
 	    stmt_order.setTimestamp(2, timeStamp);
 	    stmt_order.setInt(3, total);
 	    stmt_order.executeUpdate();
 
 	    rs_id = stmt_order.executeQuery("SELECT LAST_INSERT_ID() AS LAST");
+	    while(rs_id.next()) {
 	    id = rs_id.getInt("LAST");
-
+	    }
 
 	    for(ProductDTO item : product) {
 	      stmt_details = con.prepareStatement("INSERT INTO details (order_id, product_id, price, quantity) VALUES (?,?,?,?)");
