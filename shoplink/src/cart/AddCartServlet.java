@@ -36,6 +36,7 @@ public class AddCartServlet extends HttpServlet {
 	  }
 
 	  Iterator<ProductDTO> itr_cart = cart.getProduct().iterator();
+	  boolean foundProduct = false;
 	  while(itr_cart.hasNext()) {
 	    ProductDTO dto = itr_cart.next();
 	    if(dto.getImages() == request.getParameter("images").replace(".jpg", "") ) {
@@ -51,18 +52,22 @@ public class AddCartServlet extends HttpServlet {
 	      request.setAttribute("msg", product.getTitle() + "をカートに追加しました");
 	      itr_cart.remove();
 	    } else {
-	      ProductDTO product = new ProductDTO();
-	      product.setId(Integer.parseInt(request.getParameter("id")));
-	      product.setTitle(request.getParameter("title"));
-	      product.setArtist(request.getParameter("artist"));
-	      product.setPrice(Integer.parseInt(request.getParameter("price")));
-	      product.setQuantity(Integer.parseInt(request.getParameter("quantity")));
-	      product.setImages(request.getParameter("images").replace(".jpg", ""));
-	      CartLogic.execute(cart, product);
-	      session.setAttribute("cart", cart);
-	      request.setAttribute("msg", product.getTitle() + "をカートに追加しました");
+	      foundProduct = true;
 	    }
 	  }
+	  if(foundProduct) {
+	    ProductDTO product = new ProductDTO();
+      product.setId(Integer.parseInt(request.getParameter("id")));
+      product.setTitle(request.getParameter("title"));
+      product.setArtist(request.getParameter("artist"));
+      product.setPrice(Integer.parseInt(request.getParameter("price")));
+      product.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+      product.setImages(request.getParameter("images").replace(".jpg", ""));
+      CartLogic.execute(cart, product);
+      session.setAttribute("cart", cart);
+      request.setAttribute("msg", product.getTitle() + "をカートに追加しました");
+	  }
+
     request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
 
 
