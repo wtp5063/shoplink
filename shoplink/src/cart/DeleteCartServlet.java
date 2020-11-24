@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class EditQuantityServlet
+ * Servlet implementation class DeleteCartServlet
  */
-@WebServlet("/EditQuantityServlet")
-public class EditQuantityServlet extends HttpServlet {
+@WebServlet("/DeleteCartServlet")
+public class DeleteCartServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	  ProductDTO product = new ProductDTO();
 	  int id = Integer.parseInt(request.getParameter("id"));
+	  int price = Integer.parseInt(request.getParameter("price"));
 	  int quantity = Integer.parseInt(request.getParameter("quantity"));
 	  HttpSession session = request.getSession();
 	  CartDTO cart = (CartDTO) session.getAttribute("cart");
@@ -28,24 +28,13 @@ public class EditQuantityServlet extends HttpServlet {
 	  while(itr.hasNext()) {
 	    ProductDTO dto = itr.next();
 	    if(dto.getId() == id) {
-	      product.setId(dto.getId());
-	      product.setTitle(dto.getTitle());
-	      product.setArtist(dto.getArtist());
-	      product.setImages(dto.getImages());
-	      product.setPrice(dto.getPrice());
-	      product.setQuantity(quantity);
-	      int beforePrice = dto.getPrice() * dto.getQuantity();
 	      itr.remove();
-	      CartLogic.update(cart, product, beforePrice);
 	    }
 	  }
-	  if(product.getImages() != null) {
-
-	    session.setAttribute("cart", cart);
-	    request.setAttribute("msg", product.getTitle() + "の数量を" + quantity + "個に変更しました");
-	  }
-
+	  CartLogic.delete(cart, price * quantity);
+	  session.setAttribute("cart", cart);
 	  request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
 
 	}
+
 }

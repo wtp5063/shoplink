@@ -27,9 +27,17 @@
 </form>
 <form action="DeleteCartServlet" method="post">
 <input type="hidden" name="id" value="${item.id}">
+<input type="hidden" name="price" value="${item.price}">
+<input type="hidden" name="quantity" value="${item.quantity}">
 <input type="submit" value="削除">
 </form>
 </c:forEach>
+<div class="cart_total">
+<p>小計：${fn: escapeXml(sessionScope.cart.subTotal)}</p>
+<p>消費税：${fn: escapeXml(sessionScope.cart.taxAmount)}</p>
+<p>送料：${fn: escapeXml(sessionScope.cart.shipping)}</p>
+<p>合計金額：${fn: escapeXml(sessionScope.cart.total)}</p>
+</div>
 </div>
 </main>
 </div>
