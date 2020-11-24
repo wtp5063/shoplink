@@ -29,7 +29,7 @@ SELECT * FROM products WHERE id = ?
 <p>${fn:escapeXml(list.artist)}</p>
 <c:if test="${fn:escapeXml(list.price) != 0}">
 <p>${fn:escapeXml(list.price)}円</p>
-<form action="CartServlet" method="post">
+<form action="AddCartServlet" method="post">
 <input type="hidden" name="id" value="${fn:escapeXml(list.id)}">
 <input type="hidden" name="images" value="${fn:escapeXml(list.images)}">
 <input type="hidden" name="title" value="${fn:escapeXml(list.title)}">

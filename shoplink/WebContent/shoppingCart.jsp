@@ -15,11 +15,20 @@
 <div class="list">
 <p class="errors">${requestScope.msg}</p>
 <c:forEach var="item" items="${sessionScope.cart.product}">
-<p>${item.images}</p>
-<p>${item.title}</p>
-<p>${item.artist}</p>
+<p>商品ID：${item.images}</p>
+<p>タイトル：${item.title}</p>
+<p>アーティスト：${item.artist}</p>
 <p>値段：${item.price}</p>
-<p>個数：${item.quantity}</p>
+<form action="editQuantityServlet" method="post">
+<label for="quantity">個数：</label>
+<input type="hidden" name="id" value="${item.id}">
+<input type="number" name="quantity" value="${item.quantity}" min="1" id="quantity">
+<input type="submit" value="数量変更">
+</form>
+<form action="DeleteCartServlet" method="post">
+<input type="hidden" name="id" value="${item.id}">
+<input type="submit" value="削除">
+</form>
 </c:forEach>
 </div>
 </main>
