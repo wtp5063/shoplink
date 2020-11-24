@@ -66,7 +66,7 @@ public class LogIn extends HttpServlet {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("account", dto);
 
-	        if(session.getAttribute("login") == null) {
+	        if(session.getAttribute("logIn") == null) {
 	        RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
 	        disp.forward(request, response);
 	        } else {

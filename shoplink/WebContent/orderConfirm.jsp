@@ -7,32 +7,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ショッピングカート</title>
+<title>注文確認画面</title>
 <jsp:include page="headerTop.jsp"/>
 <div class="box">
 <jsp:include page="aside.jsp" />
 <main>
 <div class="list">
-<p class="errors">${requestScope.msg}</p>
+<div class="customer_information">
+<p>氏名：${sessionScope.account.name}</p>
+<p>Eメール：${sessionScope.account.email}</p>
+<p>住所：${sessionScope.account.address}</p>
+<p>電話番号：${sessionScope.account.tel}</p>
+</div>
 <c:forEach var="item" items="${sessionScope.cart.product}">
 <p>商品ID：${item.images}</p>
 <p>タイトル：${item.title}</p>
 <p>アーティスト：${item.artist}</p>
 <p>値段：${item.price}</p>
-<form action="EditQuantityServlet" method="post">
-<label for="quantity">個数：</label>
-<input type="hidden" name="id" value="${item.id}">
-<input type="number" name="quantity" value="${item.quantity}" min="1" id="quantity">
-<input type="submit" value="数量変更">
-</form>
-<form action="DeleteCartServlet" method="post">
-<input type="hidden" name="id" value="${item.id}">
-<input type="hidden" name="price" value="${item.price}">
-<input type="hidden" name="quantity" value="${item.quantity}">
-<input type="submit" value="削除">
-</form>
 </c:forEach>
-<c:if test="${sessionScope.totalAmount.subTotal != 0 && sessionScope.cart != null}">
 <div class="cart_total">
 <p>小計：${fn: escapeXml(sessionScope.totalAmount.subTotal)}</p>
 <p>消費税：${fn: escapeXml(sessionScope.totalAmount.taxAmount)}</p>
@@ -42,10 +34,6 @@
 <input type="submit" value="購入">
 </form>
 </div>
-</c:if>
-<c:if test="${sessionScope.totalAmount.subTotal == 0 || sessionScope.cart == null}">
-<p>商品を追加して下さい</p>
-</c:if>
 </div>
 </main>
 </div>

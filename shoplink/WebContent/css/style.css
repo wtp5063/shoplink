@@ -92,7 +92,6 @@ main{
 main .list{
 	width:80%;
 	background-color:#FFFFFC;
-	padding-bottom:1rem;
 }
 
 main img{
@@ -158,6 +157,12 @@ main .description{
 	border:solid 2px #d3d3d3;
 	padding:1rem;
 	margin-top:1rem;
+}
+
+.customer_information{
+	border:solid 5px #d3d3d3;
+  padding:1rem;
+  margin-bottom:1rem;
 }
 
 footer{

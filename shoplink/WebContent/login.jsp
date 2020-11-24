@@ -14,7 +14,7 @@
 <body>
 <header class="header">
 <h1><a href="index.jsp">ShopLink</a></h1>
-<a href="ShoppingCart.jsp" class="cart">ショッピングカート</a>
+<a href="shoppingCart.jsp" class="cart">ショッピングカート</a>
 </header>
 <section class="admission">
 <h2>会員情報入力</h2>
