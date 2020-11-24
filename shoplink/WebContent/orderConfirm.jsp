@@ -30,8 +30,8 @@
 <p>消費税：${fn: escapeXml(sessionScope.totalAmount.taxAmount)}</p>
 <p>送料：${fn: escapeXml(sessionScope.totalAmount.shipping)}</p>
 <p>合計金額：${fn: escapeXml(sessionScope.totalAmount.totalAmount)}</p>
-<form action="ToBuyServlet" method="post">
-<input type="submit" value="購入">
+<form action="OrderServlet" method="post">
+<input type="submit" value="注文">
 </form>
 </div>
 </div>
