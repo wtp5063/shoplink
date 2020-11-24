@@ -19,7 +19,7 @@
 <p>タイトル：${item.title}</p>
 <p>アーティスト：${item.artist}</p>
 <p>値段：${item.price}</p>
-<form action="editQuantityServlet" method="post">
+<form action="EditQuantityServlet" method="post">
 <label for="quantity">個数：</label>
 <input type="hidden" name="id" value="${item.id}">
 <input type="number" name="quantity" value="${item.quantity}" min="1" id="quantity">
