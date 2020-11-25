@@ -27,9 +27,8 @@ public class OrderHistoryServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	  String user_id = request.getParameter("id");
+	  int user_id = Integer.parseInt(request.getParameter("id"));
 	  List<DetailsDTO> list = new ArrayList<>();
-	  HistoryDTO history = new HistoryDTO();
 	  List<HistoryDTO> history_list = new ArrayList<>();
 
 	  Connection con = null;
@@ -43,33 +42,33 @@ public class OrderHistoryServlet extends HttpServlet {
 	  try {
 	    con = BaseDatabase.getConnection();
 	    stmt_order = con.prepareStatement("SELECT * FROM new_order WHERE customer_id = ?");
-	    stmt_order.setString(1, user_id);
+	    stmt_order.setInt(1, user_id);
 	    rs_order = stmt_order.executeQuery();
 	    while(rs_order.next()) {
+	    HistoryDTO history = new HistoryDTO();
 	    history.setId(rs_order.getInt("id"));
 	    Timestamp ts = rs_order.getTimestamp("datetime");
 	    LocalDateTime ldt = ts.toLocalDateTime();
 	    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd hh:mm:ss");
 	    history.setDatetime(dtf.format(ldt));
-	    history.setTotalAmount(rs_order.getInt("total_amounr"));
-
+	    history.setTotalAmount(rs_order.getInt("total_amount"));
 	    stmt_detail = con.prepareStatement("SELECT * FROM details WHERE order_id = ?");
 	    stmt_detail.setInt(1, rs_order.getInt("id"));
 	    rs_detail = stmt_detail.executeQuery();
 	    while(rs_detail.next()) {
 	      stmt_product = con.prepareStatement("SELECT * FROM products WHERE images = ?");
-	      stmt_product.setString(1, rs_detail.getString("product") + ".jpg");
+	      stmt_product.setString(1, rs_detail.getString("product_id") + ".jpg");
 	      rs_product = stmt_product.executeQuery();
 	      while(rs_product.next()) {
 	        DetailsDTO detailsDto = new DetailsDTO();
 	        detailsDto.setTitle(rs_product.getString("title"));
 	        detailsDto.setArtist(rs_product.getString("artist"));
 	        detailsDto.setPrice(rs_product.getInt("price"));
-	        detailsDto.setQuantity(rs_product.getInt("quantity"));
+	        detailsDto.setQuantity(rs_detail.getInt("quantity"));
 	        list.add(detailsDto);
 	      }
+	      history.setList(list);
 	    }
-	    history.setList(list);
 	    history_list.add(history);
 	  }
 	} catch(SQLException e) {
@@ -91,6 +90,8 @@ public class OrderHistoryServlet extends HttpServlet {
 	    e.printStackTrace();
 	  }
 	}
+
+	  request.setAttribute("puroduct_list", list);
 	  request.setAttribute("history", history_list);
 	  request.getRequestDispatcher("customerHistory.jsp").forward(request, response);
 

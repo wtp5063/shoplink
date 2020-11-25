@@ -15,6 +15,10 @@
   <p>住所：${fn:escapeXml(account.getAddress())}</p>
   <p>電話番号：${fn:escapeXml(account.getTel())}</p>
   <a href="updateAccount.jsp"><input type="button" value="会員情報編集"></a>
+  <form action="OrderHistoryServlet" method="post">
+  <input type="hidden" name="id" value="${fn:escapeXml(account.id)}">
+  <input type="submit" value="購入履歴">
+  </form>
   <form action="LogOutServlet" method="post">
     <input type="submit" value="ログアウト">
   </form>

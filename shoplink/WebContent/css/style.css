@@ -165,6 +165,15 @@ main .description{
   margin-bottom:1rem;
 }
 
+.product_detail{
+	border:solid 2px #d3d3d3;
+}
+
+.order_detail{
+	border:solid 5px #d3d3d3;
+  padding:1rem;
+}
+
 footer{
 	height:3rem;
 	background-color:#006400;

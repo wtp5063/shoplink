@@ -25,8 +25,8 @@ SELECT * FROM customer WHERE admin = 2
 <td>${row.address}</td>
 <td>${row.tel}</td>
 <td>
-<form action="CustomerHistory" method="post">
-<input type="hidden" name="name" value="${row.id}">
+<form action="OrderHistoryServlet" method="post">
+<input type="hidden" name="id" value="${row.id}">
 <input type="submit" value="注文履歴">
 </form>
 </td>
