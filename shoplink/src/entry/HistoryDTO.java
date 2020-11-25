@@ -1,7 +1,6 @@
 package entry;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,7 @@ public class HistoryDTO implements Serializable {
 
   private List<DetailsDTO> list;
   private int id;
-  private LocalDateTime datetime;
+  private String datetime;
   private int totalAmount;
 
   public HistoryDTO() {
@@ -29,10 +28,10 @@ public class HistoryDTO implements Serializable {
   public void setId(int id) {
     this.id = id;
   }
-  public LocalDateTime getDatetime() {
+  public String getDatetime() {
     return datetime;
   }
-  public void setDatetime(LocalDateTime datetime) {
+  public void setDatetime(String datetime) {
     this.datetime = datetime;
   }
   public int getTotalAmount() {
