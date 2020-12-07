@@ -1,10 +1,8 @@
 package entry;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,82 +12,74 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import database.BaseDatabase;
+import database.dao.CustomerDao;
+import database.dao.entity.CustomerEntity;
 
 /**
  * Servlet implementation class LogIn
  */
 @WebServlet("/LogIn")
-public class LogIn extends HttpServlet {
+public class LogIn extends HttpServlet
+{
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	  String email = request.getParameter("email");
-	  String password = request.getParameter("password");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        // TODO Auto-generated method stub
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-	  ErrorCheck eCheck = new ErrorCheck();
-    eCheck.logInCheck(email, password);
-    if(eCheck.hasErrors()) {
-      request.setAttribute("errors", eCheck.errorList());
-      RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
-      disp.forward(request, response);
-      return;
+        ErrorCheck eCheck = new ErrorCheck();
+        eCheck.logInCheck(email, password);
+        if (eCheck.hasErrors())
+        {
+            request.setAttribute("errors", eCheck.errorList());
+            RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
+            disp.forward(request, response);
+            return;
+        }
+
+        CustomerEntity dto = null;
+
+        try
+        {
+            dto = CustomerDao.selectByLogInData(password, email);
+        }
+        catch (SQLException e)
+        {
+            request.setAttribute("errors", Arrays.asList(new String [] {"msg..."}));
+            RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
+            disp.forward(request, response);
+            e.printStackTrace();
+        }
+
+        if (dto == null)
+        {
+            request.setAttribute("errors", Arrays.asList(new String [] {"msg2..."}));
+            RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
+            disp.forward(request, response);
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("account", dto);
+        if (dto.getAdmin() == 1)
+        {
+            RequestDispatcher disp = request.getRequestDispatcher("manager.jsp");
+            disp.forward(request, response);
+        }
+        else
+        {
+            if (session.getAttribute("logIn") == null)
+            {
+                RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
+                disp.forward(request, response);
+            }
+            else
+            {
+                RequestDispatcher disp = request.getRequestDispatcher("orderConfirm.jsp");
+                disp.forward(request, response);
+            }
+        }
+
     }
-
-	  Connection con = null;
-	  PreparedStatement stmt = null;
-	  ResultSet rs = null;
-	  String sql = "SELECT * FROM customer WHERE email = ? AND password = ?";
-	  try {
-	    con = BaseDatabase.getConnection();
-	    stmt = con.prepareStatement(sql);
-	    stmt.setString(1, email);
-	    stmt.setString(2, password);
-	    rs = stmt.executeQuery();
-	    if(rs.next()) {
-	      int admin = rs.getInt("admin");
-	      if(admin == 1) {
-	        CustomerDTO dto = new CustomerDTO();
-	        dto.setName(rs.getString("name"));
-	        dto.setAdmin(rs.getInt("admin"));
-	        HttpSession session = request.getSession();
-          session.setAttribute("account", dto);
-	        RequestDispatcher disp = request.getRequestDispatcher("manager.jsp");
-	        disp.forward(request, response);
-	      } else {
-	        CustomerDTO dto = new CustomerDTO();
-	        dto.setId(rs.getInt("id"));
-	        dto.setName(rs.getString("name"));
-	        dto.setEmail(rs.getString("email"));
-	        dto.setAddress(rs.getString("address"));
-	        dto.setTel(rs.getString("tel"));
-	        HttpSession session = request.getSession();
-	        session.setAttribute("account", dto);
-
-	        if(session.getAttribute("logIn") == null) {
-	        RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
-	        disp.forward(request, response);
-	        } else {
-	          RequestDispatcher disp = request.getRequestDispatcher("orderConfirm.jsp");
-	          disp.forward(request, response);
-	        }
-	      }
-	    }
-	  } catch(SQLException e) {
-	    e.printStackTrace();
-	  } catch(Exception e) {
-	    e.printStackTrace();
-	  } finally {
-	    try {
-	      if(rs != null) {rs.close();}
-	      if(stmt != null) {stmt.close();}
-	      if(con != null) {con.close();}
-	    } catch(SQLException e) {
-	      e.printStackTrace();
-	    } catch(Exception e) {
-	      e.printStackTrace();
-	    }
-	  }
-	}
 
 }
