@@ -4,7 +4,7 @@
 <aside>
   <section>
     <h2>キーワード検索</h2>
-    <form action="searchProduct.jsp" method="get">
+    <form action="SearchProductServlet" method="post">
       <input type="text" name="search" size="25" value="${param.search}">
       <input type="submit" value="検索">
     </form>

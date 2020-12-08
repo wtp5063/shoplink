@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<sql:setDataSource var="db" url="jdbc:mysql://localhost:3306/customer"
-  user="root" password="root" driver="com.mysql.cj.jdbc.Driver" />
-<sql:query var="rs" dataSource="${db}">
-SELECT * FROM products WHERE title LIKE ? OR artist LIKE ?
-
-<sql:param value="%${param.search}%"/>
-<sql:param value="%${param.search}%"/>
-</sql:query>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,15 +12,16 @@ SELECT * FROM products WHERE title LIKE ? OR artist LIKE ?
 <jsp:include page="aside.jsp" />
 <main>
 <div class="list">
-<c:forEach var="list" items="${rs.rows}">
+<p>${msg}</p>
+<c:forEach var="list" items="${product}">
 <div class="product">
 <div class="img">
-<a href="productDetails.jsp?id=${fn:escapeXml(list.id)}">
+<a href="ProductDetailsServlet?id=${fn:escapeXml(list.id)}">
 <img src="${pageContext.request.contextPath}/images/${list.images}">
 </a>
 </div>
 <div class="description">
-<p><a href="productDetails.jsp?id=${fn:escapeXml(list.id)}">${fn:escapeXml(list.title)}</a></p>
+<p><a href="ProductDetailsServlet?id=${fn:escapeXml(list.id)}">${fn:escapeXml(list.title)}</a></p>
 <form action="CategoryServlet" method="post">
 <p>${fn:escapeXml(list.artist)}</p>
 </form>
