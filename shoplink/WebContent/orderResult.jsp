@@ -15,6 +15,7 @@
 <div class="list">
 <p>注文を完了しました！</p>
 <p>注文番号：${requestScope.order_id}</p>
+<p><a href="/">ホームに戻る</a></p>
 </div>
 </main>
 </div>
