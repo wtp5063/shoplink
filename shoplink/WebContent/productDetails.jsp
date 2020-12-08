@@ -12,6 +12,7 @@
 <jsp:include page="aside.jsp"></jsp:include>
 <main>
 <div class="list">
+<p>${msg}</p>
 <div class="product">
 <div class="img">
 <img src="${pageContext.request.contextPath}/images/${list.images}">

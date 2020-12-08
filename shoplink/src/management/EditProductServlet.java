@@ -1,8 +1,6 @@
 package management;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -11,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.BaseDatabase;
+import database.dao.EditProductDao;
 
 /**
  * Servlet implementation class EditProductServlet
@@ -25,32 +23,27 @@ public class EditProductServlet extends HttpServlet {
 	  String title = request.getParameter("title");
 	  String artist = request.getParameter("artist");
 	  String price = request.getParameter("price");
-	  Connection con = null;
-	  PreparedStatement stmt = null;
-	  try {
-	    con = BaseDatabase.getConnection();
-	    stmt = con.prepareStatement("UPDATE products SET title=?, artist=?, price=? WHERE id = ?");
-	    stmt.setString(1, title);
-	    stmt.setString(2, artist);
-	    stmt.setString(3, price);
-	    stmt.setString(4, id);
-	    stmt.executeUpdate();
-	  } catch(SQLException e) {
-	    e.printStackTrace();
-	  } catch(Exception e) {
-	    e.printStackTrace();
-	  } finally {
-	    try {
-	      if(stmt != null) {stmt.close();}
-	      if(con != null) {stmt.close();}
-	    } catch(SQLException e) {
-	      e.printStackTrace();
-	    } catch(Exception e) {
-	      e.printStackTrace();
-	    }
-	  }
+
+	  boolean result = false;
+	  try
+    {
+        result = EditProductDao.updateProductById(id, title, artist, price);
+    }
+    catch (SQLException e)
+    {
+        e.printStackTrace();
+        request.setAttribute("msg", "データベースにアクセスできませんでした");
+    }
+	  if (result)
+    {
+        request.setAttribute("msg", "更新に成功しました");
+    }
+    else
+    {
+        request.setAttribute("msg", "更新に失敗しました");
+    }
 	  request.setAttribute("id", id);
-	  request.getRequestDispatcher("productDetails.jsp").forward(request, response);
+	  request.getRequestDispatcher("ProductDetailsServlet").forward(request, response);
 
 	}
 }

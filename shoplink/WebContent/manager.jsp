@@ -16,12 +16,12 @@
 <c:forEach var="row" items="${list}">
 <div class="product">
 <div class="img">
-<a href="productDetails.jsp?id=${fn:escapeXml(row.id)}">
+<a href="ProduceDetailsServlet?id=${fn:escapeXml(row.id)}">
 <img src="${pageContext.request.contextPath}/images/${row.images}">
 </a>
 </div>
 <div class="description">
-<p><a href="productDetails.jsp?id=${fn:escapeXml(row.id)}">${fn:escapeXml(row.title)}</a></p>
+<p><a href="ProductDetailsServlet?id=${fn:escapeXml(row.id)}">${fn:escapeXml(row.title)}</a></p>
 <form action="CategoryServlet" method="post">
 <p>${fn:escapeXml(row.artist)}</p>
 </form>
