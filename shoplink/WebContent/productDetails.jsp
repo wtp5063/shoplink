@@ -2,13 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<sql:setDataSource var="db" url="jdbc:mysql://localhost:3306/customer"
-  user="root" password="root" driver="com.mysql.cj.jdbc.Driver"/>
-<sql:query var="rs" dataSource="${db}">
-SELECT * FROM products WHERE id = ?
-<sql:param value="${param.id}" />
-</sql:query>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +12,6 @@ SELECT * FROM products WHERE id = ?
 <jsp:include page="aside.jsp"></jsp:include>
 <main>
 <div class="list">
-<c:forEach var="list" items="${rs.rows}">
 <div class="product">
 <div class="img">
 <img src="${pageContext.request.contextPath}/images/${list.images}">
@@ -43,14 +35,13 @@ SELECT * FROM products WHERE id = ?
 <p>売り切れ</p>
 </c:if>
 <c:if test="${sessionScope.account.getAdmin() == 1}">
-<form action="editProduct.jsp" method="post">
-<input type="hidden" name="id" value="${param.id}">
+<form action="BeforeEditProductServlet" method="post">
+<input type="hidden" name="id" value="${list.id}">
 <input type="submit" value="編集">
 </form>
 </c:if>
 </div>
 </div>
-</c:forEach>
 </div>
 </main>
 </div>

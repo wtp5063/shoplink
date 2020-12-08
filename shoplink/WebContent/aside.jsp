@@ -11,7 +11,7 @@
   </section>
   <section>
     <h2>カテゴリー検索</h2>
-    <form action="productCategory.jsp" method="get">
+    <form action="ProductCategoryServlet" method="post">
       <select name="category">
         <c:choose>
           <c:when test="${empty param.category}">
