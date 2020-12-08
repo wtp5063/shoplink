@@ -100,16 +100,9 @@ public class ErrorCheck
         return !this.errors.isEmpty();
     }
 
-    public String errorList()
+    public List<String> errorList()
     {
-        StringBuffer buff = new StringBuffer();
-        buff.append("<ul class='errors'>");
-        for (String error : this.errors)
-        {
-            buff.append("<li>" + error + "</li>");
-        }
-        buff.append("</ul>");
-        return buff.toString();
+        return errors;
     }
 
 }

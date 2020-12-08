@@ -18,7 +18,11 @@
 </header>
 <section class="admission">
 <h2>会員情報入力</h2>
-${errors}
+  <ul>
+    <c:forEach var="error" items="${errors}">
+      <li>${error}</li>
+    </c:forEach>
+  </ul>
 <form action="LogIn" method="POST">
 <input type="email" name="email" size="35" maxlength="35" placeholder="メールアドレス">
 <input type="password" name="password" size="35" minlength="8" maxlength="15" placeholder="パスワード">

@@ -13,6 +13,7 @@
 <main>
 <div class="list">
 <p>${errors}</p>
+<p>${msg}</p>
 <c:forEach var="list" items="${rs}">
 <div class="product">
 <div class="img">

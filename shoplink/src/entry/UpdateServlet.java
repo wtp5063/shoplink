@@ -1,9 +1,6 @@
 package entry;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import database.BaseDatabase;
+import database.dao.UpdateAccountDao;
+import database.dao.entity.CustomerEntity;
 
 /**
  * Servlet implementation class UpdateServlet
@@ -43,69 +41,24 @@ public class UpdateServlet extends HttpServlet {
       disp.forward(request, response);
       return;
     }
-    //セッション取得
+
     HttpSession session = request.getSession();
-    //データベース接続
-    Connection con = null;
-    PreparedStatement stmt = null;
-    try {
-      con = BaseDatabase.getConnection();
-      stmt = con.prepareStatement("UPDATE customer SET name=?,email=?,password=?,address=?,tel=? WHERE name = ?");
-      stmt.setString(1, name);
-      stmt.setString(2, email);
-      stmt.setString(3, password);
-      stmt.setString(4, address);
-      stmt.setString(5, tel);
-      //セッション情報取得
-      CustomerDTO sessionDto = (CustomerDTO)session.getAttribute("account");
-      stmt.setString(6, sessionDto.getName());
-      stmt.executeUpdate();
-    } catch(SQLException e) {
-      e.printStackTrace();
-    } catch(Exception e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        if(stmt != null) {stmt.close();}
-        if(con != null) {con.close();}
-      } catch(SQLException e) {
+    CustomerEntity sessionDto = (CustomerEntity)session.getAttribute("account");
+    int id = sessionDto.getId();
+
+    CustomerEntity result = null;
+    try
+    {
+        result = UpdateAccountDao.updateAccountByName(name, email, password, address, tel, id);
+    }
+    catch (SQLException e)
+    {
         e.printStackTrace();
-      } catch(Exception e) {
-        e.printStackTrace();
-      }
+        request.setAttribute("msg", "データベースにアクセスできませんでした");
     }
 
-    PreparedStatement query = null;
-    ResultSet rs = null;
-    try {
-      con = BaseDatabase.getConnection();
-      query = con.prepareStatement("SELECT * FROM customer WHERE name = ?");
-      query.setString(1, name);
-      rs = query.executeQuery();
-      if(rs.next()) {
-        CustomerDTO dto = new CustomerDTO();
-        dto.setName(rs.getString("name"));
-        dto.setEmail(rs.getString("email"));
-        dto.setAddress(rs.getString("address"));
-        dto.setTel(rs.getString("tel"));
-        session.setAttribute("account", dto);
-        RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
-        disp.forward(request, response);
-      }
-    } catch(SQLException e) {
-      e.printStackTrace();
-    } catch(Exception e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        if(stmt != null) {stmt.close();}
-        if(con != null) {con.close();}
-      } catch(SQLException e) {
-        e.printStackTrace();
-      } catch(Exception e) {
-        e.printStackTrace();
-      }
-      }
-
+    session.setAttribute("account", result);
+    RequestDispatcher disp = request.getRequestDispatcher("/");
+    disp.forward(request, response);
  }
 }
