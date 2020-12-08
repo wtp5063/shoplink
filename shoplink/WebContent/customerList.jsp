@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<sql:setDataSource var="db" url="jdbc:mysql://localhost:3306/customer"
-    user="root" password="root" driver="com.mysql.cj.jdbc.Driver" />
-<sql:query var="rs" dataSource="${db}">
-SELECT * FROM customer WHERE admin = 2
-</sql:query>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +11,9 @@ SELECT * FROM customer WHERE admin = 2
 <section class="customerList">
 <table>
 <tr>
-<th colspan="7"><h2>顧客リスト</h2></th>
+<th colspan="7"><h2>顧客リスト</h2>${errors}</th>
 </tr>
-<c:forEach var="row" items="${rs.rows}">
+<c:forEach var="row" items="${list}">
 <tr>
 <td>${row.name}</td>
 <td>${row.email}</td>
@@ -31,7 +26,7 @@ SELECT * FROM customer WHERE admin = 2
 </form>
 </td>
 <td>
-<form action="editCustomer.jsp" method="post">
+<form action="BeforeEditServlet" method="post">
 <input type="hidden" name="id" value="${row.id}">
 <input type="submit" value="編集">
 </form>

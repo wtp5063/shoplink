@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database.BaseDatabase;
-import entry.CustomerDTO;
+import database.dao.entity.CustomerEntity;
 
 /**
  * Servlet implementation class OrderServlet
@@ -28,7 +28,7 @@ public class OrderServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	  HttpSession session = request.getSession();
-	  CustomerDTO account = (CustomerDTO) session.getAttribute("account");
+	  CustomerEntity account = (CustomerEntity) session.getAttribute("account");
 	  CartDTO cart = (CartDTO)session.getAttribute("cart");
 	  TotalAmountDTO totalAmount = (TotalAmountDTO)session.getAttribute("totalAmount");
 

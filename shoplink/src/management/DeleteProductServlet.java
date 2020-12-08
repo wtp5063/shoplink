@@ -2,8 +2,6 @@ package management;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -12,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.BaseDatabase;
+import database.dao.DeleteProductDao;
 
 /**
  * Servlet implementation class DeleteProductServlet
@@ -25,32 +23,27 @@ public class DeleteProductServlet extends HttpServlet {
 
     String id = request.getParameter("id");
     String images = request.getParameter("images");
-    Connection con = null;
-    PreparedStatement stmt = null;
-    try {
-      con = BaseDatabase.getConnection();
-      con.setAutoCommit(false);
-      stmt = con.prepareStatement("DELETE FROM products WHERE id = ?");
-      stmt.setString(1, id);
-      stmt.executeUpdate();
-      File file = new File(getServletContext().getRealPath("/images") + "/" + images);
-      file.delete();
-      con.commit();
-    } catch(SQLException e) {
-      e.printStackTrace();
-    } catch(Exception e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        if(stmt != null) {stmt.close();}
-        if(stmt != null) {stmt.close();}
-      } catch(SQLException e) {
+    boolean result = false;
+
+    try
+    {
+        result = DeleteProductDao.deleteProductById(id);
+    }
+    catch (SQLException e)
+    {
         e.printStackTrace();
-      } catch(Exception e) {
-        e.printStackTrace();
-      }
+        request.setAttribute("msg", "データベースにアクセスできませんでした");
+    }
+    if (result)
+    {
+        File file = new File(getServletContext().getRealPath("/images") + "/" + images);
+        file.delete();
+        request.setAttribute("msg", "削除に成功しました");
+    }
+    else
+    {
+        request.setAttribute("msg", "削除に失敗しました");
     }
     request.getRequestDispatcher("manager.jsp").forward(request, response);
-
 	}
 }

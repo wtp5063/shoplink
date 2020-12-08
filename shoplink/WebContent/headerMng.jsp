@@ -6,8 +6,8 @@
 </head>
 <body>
 <header class="header">
-<h1><a href="index.jsp">ShopLink</a></h1>
+<h1><a href="/">ShopLink</a></h1>
 <a href="newProduct.jsp" class="add">商品追加</a>
-<a href="customerList.jsp" class="edit">顧客管理</a>
+<a href="CustomerListServlet" class="edit">顧客管理</a>
 <a href="LogOutServlet" class="logout">ログアウト</a>
 </header>

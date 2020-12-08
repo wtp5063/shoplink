@@ -9,37 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.dao.DeleteCustomerDao;
+import database.dao.entity.CustomerEntity;
+import database.dao.entity.CustomerSelectDao;
 
 /**
- * Servlet implementation class DeleteCustomer
+ * Servlet implementation class BeforeEditServlet
  */
-@WebServlet("/DeleteCustomer")
-public class DeleteCustomer extends HttpServlet
+@WebServlet("/BeforeEditServlet")
+public class BeforeEditServlet extends HttpServlet
 {
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        CustomerEntity list = null;
         String id = request.getParameter("id");
-        boolean result = false;
 
         try
         {
-            result = DeleteCustomerDao.deleteCustomerById(id);
+            list = CustomerSelectDao.selectCustomer(id);
         }
         catch (SQLException e)
         {
             request.setAttribute("errors", "データベースにアクセスできませんでした");
             e.printStackTrace();
         }
-        if (result)
-        {
-            request.setAttribute("errors", "削除に成功しました");
-        }
-        else
-        {
-            request.setAttribute("errors", "削除に失敗しました");
-        }
-        request.getRequestDispatcher("CustomerListServlet").forward(request, response);
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("editCustomer.jsp").forward(request, response);
     }
 }

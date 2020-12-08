@@ -1,8 +1,6 @@
 package entry;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.BaseDatabase;
+import database.dao.InsertCustomerDao;
+import database.dao.entity.CustomerEntity;
 
 /**
  * Servlet implementation class InsertCustomer
@@ -35,7 +34,7 @@ public class InsertCustomer extends HttpServlet {
 	  eCheck.duplicateCheck(email);
 	  eCheck.passwordCheck(password, validation);
 	  eCheck.regExpCheck(tel, "^0\\d{9,}$", "電話番号");
-	  //エラーが見つかった場合にエラー情報をリクエストに格納し、フォワード。
+
 	  if(eCheck.hasErrors()) {
 	    request.setAttribute("errors", eCheck.errorList());
 	    RequestDispatcher disp = request.getRequestDispatcher("admissionCustomer.jsp");
@@ -43,34 +42,41 @@ public class InsertCustomer extends HttpServlet {
 	    return;
 	  }
 
-	  Connection con = null;
-	  PreparedStatement stmt = null;
-	  try {
-	    con = BaseDatabase.getConnection();
-	    stmt = con.prepareStatement("INSERT INTO customer (name,email,password,address,tel) VALUES (?,?,?,?,?)");
-	    stmt.setString(1, name);
-	    stmt.setString(2, email);
-	    stmt.setString(3, password);
-	    stmt.setString(4, address);
-	    stmt.setString(5, tel);
-	    stmt.executeUpdate();
-	  } catch(SQLException e) {
-	    e.printStackTrace();
-	  } catch(Exception e) {
-	    e.printStackTrace();
-	  } finally {
-	    try {
-	      if(stmt != null) {stmt.close();}
-	      if(con != null) {con.close();}
-	    } catch(SQLException e) {
-	      e.printStackTrace();
-	    } catch(Exception e) {
-	      e.printStackTrace();
-	    }
-	  }
+	  CustomerEntity entity = new CustomerEntity();
+	  entity.setName(name);
+	  entity.setEmail(email);
+	  entity.setPassword(password);
+	  entity.setAddress(address);
+	  entity.setTel(tel);
 
-	  RequestDispatcher disp = request.getRequestDispatcher("admissionCustomer.jsp");
-	  disp.forward(request, response);
+	  boolean insert = false;
+
+	  try
+    {
+        insert = InsertCustomerDao.insertProfile(entity);
+    }
+    catch (SQLException e)
+    {
+        request.setAttribute("errors", "登録に失敗しました");
+        request.getRequestDispatcher("admissionCustomer.jsp").forward(request, response);
+        e.printStackTrace();
+        return;
+    }
+	  if (insert)
+    {
+	      request.setAttribute("email", email);
+	      request.setAttribute("password", password);
+	      request.getRequestDispatcher("/LogIn").forward(request, response);
+	      return;
+    }
+    else
+    {
+        request.setAttribute("errors", "登録に失敗しました");
+        RequestDispatcher disp = request.getRequestDispatcher("admissionCustomer.jsp");
+        disp.forward(request, response);
+        return;
+    }
+
 	}
 
 }

@@ -1,8 +1,6 @@
 package management;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -11,44 +9,47 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.BaseDatabase;
+import database.dao.SoldOutDao;
 
 /**
  * Servlet implementation class SoldOutServlet
  */
 @WebServlet("/SoldOutServlet")
-public class SoldOutServlet extends HttpServlet {
+public class SoldOutServlet extends HttpServlet
+{
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String id = request.getParameter("id");
-    int price = Integer.parseInt(request.getParameter("price"));
-    Connection con = null;
-    PreparedStatement stmt = null;
-    int isSold = 0;
-    if(price == 0) {
-      isSold = 3000;
-    }
-    try {
-      con = BaseDatabase.getConnection();
-      stmt = con.prepareStatement("UPDATE products SET price = ? WHERE id = ?");
-      stmt.setInt(1, isSold);
-      stmt.setString(2, id);
-      stmt.executeUpdate();
-    } catch(SQLException e) {
-      e.printStackTrace();
-    } catch(Exception e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        if(stmt != null) {stmt.close();}
-        if(con != null) {con.close();}
-      } catch(SQLException e) {
-        e.printStackTrace();
-      } catch(Exception e) {
-        e.printStackTrace();
-      }
-    }
-    request.getRequestDispatcher("productDetails.jsp").forward(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        boolean result = false;
+        String id = request.getParameter("id");
+        int price = Integer.parseInt(request.getParameter("price"));
+        int isSold = 0;
+        if (price == 0)
+        {
+            isSold = 3000;
+        }
+        try
+        {
+            result = SoldOutDao.updateProductById(isSold, id);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            request.setAttribute("msg", "データベースにアクセスできませんでした");
+            request.getRequestDispatcher("editProduct.jsp").forward(request, response);
+            return;
+        }
+        if (result)
+        {
+            request.setAttribute("msg", "更新に成功しました");
+        }
+        else
+        {
+            request.setAttribute("msg", "更新に失敗しました");
+            request.getRequestDispatcher("editProduct.jsp").forward(request, response);
+            return;
 
-	}
+        }
+        request.getRequestDispatcher("productDetails.jsp").forward(request, response);
+    }
 }

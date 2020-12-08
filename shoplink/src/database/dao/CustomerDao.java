@@ -10,7 +10,7 @@ import database.dao.entity.CustomerEntity;
 
 public class CustomerDao
 {
-    public static CustomerEntity selectByLogInData(String password, String email) throws SQLException
+    public static CustomerEntity selectByLogInData(String email, String password) throws SQLException
     {
         CustomerEntity dto = null;
         String sql = "SELECT * FROM customer WHERE email = ? AND password = ?";

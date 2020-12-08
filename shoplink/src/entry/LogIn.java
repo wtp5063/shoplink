@@ -24,7 +24,6 @@ public class LogIn extends HttpServlet
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
@@ -39,38 +38,39 @@ public class LogIn extends HttpServlet
         }
 
         CustomerEntity dto = null;
-
         try
         {
-            dto = CustomerDao.selectByLogInData(password, email);
+            dto = CustomerDao.selectByLogInData(email, password);
         }
         catch (SQLException e)
         {
-            request.setAttribute("errors", Arrays.asList(new String [] {"msg..."}));
+            e.printStackTrace();
+            request.setAttribute("errors", Arrays.asList(new String[] {"msg..."}));
             RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
             disp.forward(request, response);
-            e.printStackTrace();
+            return;
         }
-
         if (dto == null)
         {
-            request.setAttribute("errors", Arrays.asList(new String [] {"msg2..."}));
+            request.setAttribute("errors", Arrays.asList(new String[] {"msg2..."}));
             RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
             disp.forward(request, response);
+            return;
         }
 
         HttpSession session = request.getSession();
         session.setAttribute("account", dto);
+
         if (dto.getAdmin() == 1)
         {
-            RequestDispatcher disp = request.getRequestDispatcher("manager.jsp");
+            RequestDispatcher disp = request.getRequestDispatcher("ManagerServlet");
             disp.forward(request, response);
         }
         else
         {
             if (session.getAttribute("logIn") == null)
             {
-                RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
+                RequestDispatcher disp = request.getRequestDispatcher("/");
                 disp.forward(request, response);
             }
             else
@@ -79,7 +79,5 @@ public class LogIn extends HttpServlet
                 disp.forward(request, response);
             }
         }
-
     }
-
 }

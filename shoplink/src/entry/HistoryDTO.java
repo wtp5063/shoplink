@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.dao.entity.DetailsEntity;
+
 public class HistoryDTO implements Serializable {
 
-  private List<DetailsDTO> list;
+  private List<DetailsEntity> list;
   private int id;
   private String datetime;
   private int totalAmount;
@@ -16,10 +18,10 @@ public class HistoryDTO implements Serializable {
     this.list = new ArrayList<>();
   }
 
-  public List<DetailsDTO> getList() {
+  public List<DetailsEntity> getList() {
     return list;
   }
-  public void setList(List<DetailsDTO> list) {
+  public void setList(List<DetailsEntity> list) {
     this.list = list;
   }
   public int getId() {

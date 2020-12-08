@@ -15,6 +15,7 @@
 <jsp:include page="aside.jsp" />
 <main>
 <div class="list">
+<p>${param.errors}</p>
 <c:forEach var="history_list" items="${requestScope.history}">
 <div class="order_detail">
 <p>注文番号：${history_list.id}
@@ -22,11 +23,7 @@
 <p>合計金額：${history_list.totalAmount}</p>
 </div>
 <div class="product_detail">
-<sql:query var="rs" dataSource="${db}">
-SELECT * FROM details WHERE order_id = ?
-<sql:param value="${history_list.id}" />
-</sql:query>
-<c:forEach var="row" items="${rs.rows}">
+<c:forEach var="row" items="${history_list.list}">
 <p>商品ID：${row.product_id}</p>
 <p>値段：${row.price}</p>
 <p>個数：${row.quantity}</p>

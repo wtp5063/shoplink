@@ -25,7 +25,7 @@ public class LogOutServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 	  HttpSession session = request.getSession();
 	  session.invalidate();
-	  RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
+	  RequestDispatcher disp = request.getRequestDispatcher("/");
 	  disp.forward(request, response);
 	}
 
